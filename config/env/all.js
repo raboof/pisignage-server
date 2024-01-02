@@ -3,9 +3,10 @@
 //installation and authCredentials has been moved to db, configure at settings tab
 var path = require('path');
 
-var rootPath = process.cwd(),
-    dataDir = path.join(rootPath, '/data'),
-    assetDir = path.join(rootPath, '/../media');
+var cwd = process.cwd(),
+    rootPath = path.join(__dirname, '/../..'),
+    dataDir = process.env.PISIGNAGE_DATA_DIR || path.join(cwd, '/data'),
+    assetDir = process.env.PISIGNAGE_MEDIA_DIR || path.join(cwd, '/../media');
 // var rootPath = process.cwd(),                     //for docker only
 //     dataDir = path.join('/data'),
 //     assetDir = path.join('/media');
@@ -29,7 +30,7 @@ module.exports = {
     
     defaultPlaylist: "default",
 
-    logFile:                rootPath+ "/../forever_out.log",
+    logFile:                cwd + "/../forever_out.log",
     logStoreDir:            assetDir+ "/_logs",
 
     mongo: {
