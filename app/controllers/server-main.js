@@ -200,7 +200,10 @@ exports.deploy = function (installation,group, cb) {
                 console.log("Error in deploy: ", err);
                 return cb(err, group);
             }
+            console.log("cycling through players");
             players[group._id.toString()].forEach(function (player) {
+                console.log("player ", player);
+                console.log("assets ", group.assets);
                 var socketio = (player.webSocket?webSocket:(player.newSocketIo?newSocketio:oldSocketio));
                 socketio.emitMessage(player.socket, 'sync',
                     group.playlists, group.assets, group.deployedTicker,
